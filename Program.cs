@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
-using TaskApp.Models;
+using TaskApp.DAL;
+using TaskApp.SAL;
 
 namespace TaskApp
 {
@@ -13,6 +14,7 @@ namespace TaskApp
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<TaskService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

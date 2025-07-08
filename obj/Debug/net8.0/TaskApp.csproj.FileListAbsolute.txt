@@ -159,3 +159,4 @@ D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\refint\TaskApp.dll
 D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\TaskApp.pdb
 D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\TaskApp.genruntimeconfig.cache
 D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\ref\TaskApp.dll
+D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\TaskApp.sourcelink.json
