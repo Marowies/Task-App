@@ -7,17 +7,7 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[TaskApp.Models.TaskItem, TaskApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "TaskApp.Controllers.TaskController",
@@ -28,22 +18,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "task",
-        "Type": "TaskApp.Models.TaskItem",
+        "Name": "taskCreateDto",
+        "Type": "TaskApp.Dtos.TaskCreateDto",
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "TaskApp.Models.TaskItem",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "TaskApp.Controllers.TaskController",
@@ -59,17 +39,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "TaskApp.Models.TaskItem",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "TaskApp.Controllers.TaskController",
@@ -85,8 +55,8 @@
         "IsRequired": true
       },
       {
-        "Name": "task",
-        "Type": "TaskApp.Models.TaskItem",
+        "Name": "taskUpdateDto",
+        "Type": "TaskApp.Dtos.TaskUpdateDto",
         "IsRequired": true
       }
     ],

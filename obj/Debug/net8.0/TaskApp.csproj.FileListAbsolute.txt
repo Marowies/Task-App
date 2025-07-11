@@ -160,3 +160,5 @@ D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\TaskApp.pdb
 D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\TaskApp.genruntimeconfig.cache
 D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\ref\TaskApp.dll
 D:\C#\test\TaskApp\TaskApp\obj\Debug\net8.0\TaskApp.sourcelink.json
+D:\C#\test\TaskApp\TaskApp\bin\Debug\net8.0\AutoMapper.dll
+D:\C#\test\TaskApp\TaskApp\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

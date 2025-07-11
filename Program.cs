@@ -14,6 +14,7 @@ namespace TaskApp
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddAutoMapper(typeof(Program));
             builder.Services.AddScoped<TaskService>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +30,7 @@ namespace TaskApp
             }
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<TaskApp.Middlewares.ExceptionMiddleware>();
 
             app.UseAuthorization();
 

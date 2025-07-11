@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using TaskApp.Dtos;
 using TaskApp.Models;
 using TaskApp.SAL;
 
@@ -10,54 +11,62 @@ namespace TaskApp.Controllers
     public class TaskController : ControllerBase
     {
         private readonly TaskService _taskService;
+        private readonly IMapper _mapper;
 
-        public TaskController(TaskService taskService)
+        public TaskController(TaskService taskService, IMapper mapper)
         {
             _taskService = taskService;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskItem>>> GetAll()
+        public IActionResult GetAll()
         {
-            var tasks = await _taskService.GetAllAsync();
-            return Ok(tasks);
+            var tasks = _taskService.GetAll();
+            var tasksDto = _mapper.Map<IEnumerable<TaskReadDto>>(tasks);
+            return Ok(tasksDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TaskItem>> GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             var task = await _taskService.GetByIdAsync(id);
-            if (task == null) return NotFound("Task not found.");
-            return Ok(task);
+          if (task == null)
+                throw new Exception("Task not found");
+
+            var taskDto = _mapper.Map<TaskReadDto>(task);
+            return Ok(taskDto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<TaskItem>> Create(TaskItem task)
+        public async Task<IActionResult> Create(TaskCreateDto taskCreateDto)
         {
-            try
-            {
-                var newTask = await _taskService.CreateAsync(task);
-                return CreatedAtAction(nameof(GetById), new { id = newTask.Id }, newTask);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var taskModel = _mapper.Map<TaskItem>(taskCreateDto);
+            var createdTask = await _taskService.CreateAsync(taskModel);
+            var taskReadDto = _mapper.Map<TaskReadDto>(createdTask);
+            return Ok(taskReadDto);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, TaskItem task)
+        public async Task<IActionResult> Update(int id, TaskUpdateDto taskUpdateDto)
         {
-            var result = await _taskService.UpdateAsync(id, task);
-            if (!result) return NotFound("Task not found.");
-            return NoContent();
+            var existingTask = await _taskService.GetByIdAsync(id);
+            if (existingTask == null)
+                return NotFound($"No task found with ID = {id}");
+
+            _mapper.Map(taskUpdateDto, existingTask);
+            await _taskService.UpdateAsync(existingTask);
+
+            return Ok("Task updated successfully");
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _taskService.DeleteAsync(id);
-            if (!result) return NotFound("Task not found.");
+            if (!result)
+                return NotFound("Task not found.");
+
             return NoContent();
         }
     }

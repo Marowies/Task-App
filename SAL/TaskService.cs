@@ -12,10 +12,10 @@ namespace TaskApp.SAL
         {
             _context = context;
         }
-
-        public async Task<List<TaskItem>> GetAllAsync()
+             
+        public IEnumerable<TaskItem> GetAll()
         {
-            return await _context.Tasks.ToListAsync();
+            return _context.Tasks.ToList();
         }
 
         public async Task<TaskItem?> GetByIdAsync(int id)
@@ -30,19 +30,11 @@ namespace TaskApp.SAL
             return task;
         }
 
-        public async Task<bool> UpdateAsync(int id, TaskItem updatedTask)
+        public async Task<bool> UpdateAsync(TaskItem task)
         {
-            var task = await _context.Tasks.FindAsync(id);
-            if (task == null) return false;
-
-            task.Title = updatedTask.Title;
-            task.Description = updatedTask.Description;
-            task.IsCompleted = updatedTask.IsCompleted;
-            task.DueDate = updatedTask.DueDate;
-            task.Priority = updatedTask.Priority;
-
-            await _context.SaveChangesAsync();
-            return true;
+            _context.Tasks.Update(task);
+            var saved = await _context.SaveChangesAsync();
+            return saved > 0;
         }
 
         public async Task<bool> DeleteAsync(int id)
